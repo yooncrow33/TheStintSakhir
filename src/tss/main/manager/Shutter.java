@@ -13,6 +13,12 @@ public class Shutter {
 
     int width = 10000;
     int height = 1080;
+    boolean b = true; // 셔터 효과 사용 여부
+
+    public boolean setScreenEffect(boolean use) {
+        b = use;
+        return b;
+    }
 
     private Main.GameScreenState nextScreen;
 
@@ -42,6 +48,10 @@ public class Shutter {
     }
 
     public void changScreen(Main.GameScreenState gss) {
+        if (!b) {
+            main.setGameScreenState(gss);
+            return;
+        }
         if (changingScreen) {
             if (progress < 0.80) return;
         }

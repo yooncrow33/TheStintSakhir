@@ -6,6 +6,7 @@ import tss.main.input.MouseListener;
 import tss.main.manager.SettingManager;
 import tss.main.manager.Shutter;
 import tss.main.object.ExitPopup;
+import tss.main.object.Console;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,18 +16,21 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class Main extends Base {
-    final int profileId;
+    public final int profileId;
     GraphicsManager gm;
     private SettingManager settingManager;
     KetListener ketListener;
     Shutter shutter;
     ExitPopup exitPopup;
+    Console console;
 
     String callSign;
     String firstName;
     String lastName;
     String driverNumber;
     String nationality;
+
+    public boolean pizza = false;
 
     public int menuFocus = 0;
 
@@ -49,8 +53,11 @@ public class Main extends Base {
         ketListener = new KetListener(this,this);
         shutter = new Shutter(this);
         exitPopup = new ExitPopup();
+        console = new Console(scopeEngine(), this);
         MouseListener mouseListener = new MouseListener(this);
         this.addMouseListener(mouseListener);
+
+        shutter.changScreen(GameScreenState.MENU);
     }
 
     public void update(double dt) {
@@ -71,6 +78,11 @@ public class Main extends Base {
     }
 
     public void render(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        if (pizza) {
+            g2.rotate(Math.PI, 1920 / 2.0, 1080 / 2.0);
+        }
+
         gm.renderBackground(g);
         switch (gameScreenState) {
             case MENU :
@@ -86,6 +98,8 @@ public class Main extends Base {
         shutter.render(g);
         exitPopup.render(g,"ARE YOU SURE?", "EXIT THE GAME");
 
+        console.render(g);
+
         /*gm.renderBackground(g);
         gm.renderBackground(g);
         gm.renderBackground(g);
@@ -100,6 +114,8 @@ public class Main extends Base {
     public Shutter getShutter() { return shutter; }
 
     public ExitPopup getExitPopup() {return exitPopup;}
+
+    public Console getConsole() {return console;}
 
     public void load() {
         Properties p = new Properties();

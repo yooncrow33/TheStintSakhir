@@ -25,6 +25,26 @@ public class SettingManager {
         return focus;
     }
 
+    public void setSettingIndex(int index,int value){
+        switch (index) {
+            case 0:
+                practiceModeIndex = value;
+                break;
+            case 1:
+                raceLengthIndex = value;
+                break;
+            case 2:
+                difficultyIndex = value;
+                break;
+            case 3:
+                weatherIndex = value;
+                break;
+            case 4:
+                emptyIndex = value;
+                break;
+        }
+        }
+
     public String getCurrentSettingValue(int index) {
         switch (index) {
             case 0:
