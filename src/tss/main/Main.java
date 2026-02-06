@@ -88,7 +88,7 @@ public class Main extends Base {
 
         gm.renderBackground(g);
 
-       /* switch (gameScreenState) {
+        switch (gameScreenState) {
             case MENU :
                 gm.renderMenu(g);
                 break;
@@ -97,8 +97,6 @@ public class Main extends Base {
                 break;
         }
 
-        */
-
 
 
         shutter.render(g);
@@ -106,7 +104,7 @@ public class Main extends Base {
 
         console.render(g);
 
-        gm.renderModeSelection(g,0);
+       // gm.renderModeSelection(g,0);
 
     }
 
