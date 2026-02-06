@@ -1,12 +1,12 @@
-package tss.main.object;
+package tss.main.`object`
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.TextArea
+import javax.swing.JFrame
 
-public class Help {
-    JFrame frame = new JFrame("Help");
-    TextArea area;
-    String helpText = "Help Information:\n\n"
+class Help {
+    var frame: JFrame = JFrame("Help")
+    var area: TextArea? = null
+    var helpText: String = ("Help Information:\n\n"
             + "1. setter.\n"
             + "\n"
             + " 1.1 val \n"
@@ -25,5 +25,5 @@ public class Help {
             + " - \n"
 
             + "3. Access settings from the main menu.\n"
-            + "4. For further assistance, visit our website.";
+            + "4. For further assistance, visit our website.")
 }

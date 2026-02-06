@@ -33,10 +33,13 @@ public class Main extends Base {
     public boolean pizza = false;
 
     public int menuFocus = 0;
+    public int mode = 0;
 
     public enum GameScreenState {
         MENU,
-        SETTINGS
+        SETTINGS,
+        MODESELECT,
+        GAME
     }
 
     GameScreenState gameScreenState = GameScreenState.MENU;
@@ -56,8 +59,6 @@ public class Main extends Base {
         console = new Console(scopeEngine(), this);
         MouseListener mouseListener = new MouseListener(this);
         this.addMouseListener(mouseListener);
-
-        shutter.changScreen(GameScreenState.MENU);
     }
 
     public void update(double dt) {
@@ -82,9 +83,12 @@ public class Main extends Base {
         if (pizza) {
             g2.rotate(Math.PI, 1920 / 2.0, 1080 / 2.0);
         }
+        gm.renderBackground(g);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         gm.renderBackground(g);
-        switch (gameScreenState) {
+
+       /* switch (gameScreenState) {
             case MENU :
                 gm.renderMenu(g);
                 break;
@@ -93,6 +97,8 @@ public class Main extends Base {
                 break;
         }
 
+        */
+
 
 
         shutter.render(g);
@@ -100,13 +106,8 @@ public class Main extends Base {
 
         console.render(g);
 
-        /*gm.renderBackground(g);
-        gm.renderBackground(g);
-        gm.renderBackground(g);
-        gm.renderBackground(g);
-        gm.renderEngineeringFullView(g);
-        r
-         */
+        gm.renderModeSelection(g,0);
+
     }
 
     public SettingManager getSettingManager() { return settingManager; }

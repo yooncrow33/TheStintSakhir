@@ -91,7 +91,9 @@ public class Launcher {
             "dev-08 2/5\n" +
             "   - 콘솔 추가.\n" +
             "\n" +
-
+            "dev-09 2/5\n" +
+            "   - ---\n" +
+            "\n" +
             "\n";
 
     String manual_text = "\n" +
