@@ -30,7 +30,8 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
             if (main.getSettingManager().getFocus() == 5) {
                 main.getShutter().changScreen(Main.GameScreenState.MENU)
             }
-        } else if (main.isScreenState(Main.GameScreenState.MENU)) {
+        }
+        if (main.isScreenState(Main.GameScreenState.MENU)) {
             if (main.getExitPopup().isVisible()) {
                 main.getExitPopup().select()
                 return
@@ -39,16 +40,20 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
                     main.getExitPopup().setVisible()
                 }
             }
+            if (main.menuFocus == 0) {
+                main.getShutter().changScreen(Main.GameScreenState.MODESELECT)
+            }
             if (main.menuFocus == 1) {
                 main.getShutter().changScreen(Main.GameScreenState.SETTINGS)
             }
         }
+        if (main.isScreenState(Main.GameScreenState.MODESELECT)) {
+            main.go()
+        }
     }
 
     override fun onKeyUpPress() {
-        if (main.isScreenState(Main.GameScreenState.SETTINGS)) {
-            main.getSettingManager().up()
-        }
+        if (main.isScreenState(Main.GameScreenState.SETTINGS)) { main.getSettingManager().up() }
         if (main.isScreenState(Main.GameScreenState.MENU)) {
             if (main.menuFocus > 0) {
                 main.menuFocus--
@@ -57,18 +62,15 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
     }
 
     override fun onKeyLeftPress() {
-        if (main.isScreenState(Main.GameScreenState.MENU) && main.getExitPopup().isVisible()) {
-            main.getExitPopup().move()
-        }
+        if (main.isScreenState(Main.GameScreenState.MENU) && main.getExitPopup().isVisible()) { main.getExitPopup().move() }
         if (main.isScreenState(Main.GameScreenState.SETTINGS)) {
             main.getSettingManager().left()
         }
+        if (main.isScreenState(Main.GameScreenState.MODESELECT)) {main.moveMode()}
     }
 
     override fun onKeyDownPress() {
-        if (main.isScreenState(Main.GameScreenState.SETTINGS)) {
-            main.getSettingManager().down()
-        }
+        if (main.isScreenState(Main.GameScreenState.SETTINGS)) { main.getSettingManager().down() }
         if (main.isScreenState(Main.GameScreenState.MENU)) {
             if (main.menuFocus < 2) {
                 main.menuFocus++
@@ -77,18 +79,21 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
     }
 
     override fun onKeyRightPress() {
-        if (main.isScreenState(Main.GameScreenState.MENU) && main.getExitPopup().isVisible()) {
-            main.getExitPopup().move()
-        }
+        if (main.isScreenState(Main.GameScreenState.MENU) && main.getExitPopup().isVisible()) { main.getExitPopup().move() }
         if (main.isScreenState(Main.GameScreenState.SETTINGS)) {
             main.getSettingManager().right()
         }
+        if (main.isScreenState(Main.GameScreenState.MODESELECT)) {main.moveMode()}
     }
 
     override fun onKeyBackspacePress() {
         if (main.getConsole().isOpen) {
             main.getConsole().inputKey('\b', 8)
         }
+    }
+
+    override fun onKeyEscPress() {
+        main.back();
     }
 
     override fun onKeyF12Press() {

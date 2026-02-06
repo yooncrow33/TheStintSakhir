@@ -2,6 +2,8 @@ package tss.main;
 
 import java.awt.*;
 
+import static java.awt.Color.blue;
+
 public class GraphicsManager {
     final Main main;
 
@@ -35,7 +37,7 @@ public class GraphicsManager {
         g.setColor(Color.GRAY);
         g.setFont(new Font("Monospaced", Font.BOLD, 16)); // 고정폭 폰트로 터미널 느낌
         g.drawString("SYSTEM STATUS: OPTIMAL", 55, 245);
-        g.drawString("VERSION: v01-dev-build", 55, 265);
+        g.drawString("VERSION: v11-dev-build", 55, 265);
 
         // 2. SETTING 버튼 (얇은 테두리 스타일)
         g.drawRect(1650, 860, 250, 60);
@@ -367,7 +369,7 @@ public class GraphicsManager {
         Graphics2D g2d = (Graphics2D) g;
 
         // 배경 (콘솔 베이스)
-        g2d.setColor(new Color(5, 5, 5));
+        g2d.setColor(new Color(15, 15, 15));
         g2d.fillRect(mx, my, mw, mh);
 
         // 테두리 및 상단 가이드
@@ -423,7 +425,7 @@ public class GraphicsManager {
 
         // 내부 텍스트 디자인
         g2d.setFont(new Font("Impact", Font.PLAIN, 44));
-        g2d.setColor(isSelected ? Color.WHITE : new Color(100, 100, 100));
+        g2d.setColor(isSelected ? new Color(240,240,240) : new Color(100, 100, 100));
         g2d.drawString(title, x + 30, y + 80);
 
         g2d.setFont(new Font("Monospaced", Font.BOLD, 16));

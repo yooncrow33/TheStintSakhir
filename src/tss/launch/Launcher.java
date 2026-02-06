@@ -97,6 +97,10 @@ public class Launcher {
             "dev-10 2/6\n" +
             "   - ---\n" +
             "\n" +
+            "dev-11 2/6\n" +
+            "   - 콘솔에 헬프 추가.\n" +
+            "   - 작동은 안한는데 어쨌든 게임에 접근 가능함(시작가능).\n" +
+            "\n" +
             "\n";
 
     String manual_text = "\n" +

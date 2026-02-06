@@ -2,6 +2,7 @@ package tss.main.`object`
 
 import scope.internal.facade.Access.ScopeEngineAccess
 import tss.main.Main
+import tss.main.`object`.Help;
 import java.awt.*
 import java.util.*
 import kotlin.math.max
@@ -14,6 +15,8 @@ class Console(var scopeEngine: ScopeEngineAccess, var main: Main) {
 
     // 스크롤 처리를 위한 변수 (로그가 많아지면 위로 밀리게)
     private val MAX_LINES = 10
+
+    val help = Help();
 
     fun toggle() {
         isOpen = !isOpen
@@ -49,9 +52,11 @@ class Console(var scopeEngine: ScopeEngineAccess, var main: Main) {
 
         // if-else if 대신 when을 쓰면 줄 맞춤이 편해져요
         when (cmd) {
+            "help" -> help.setVisible()
             "clear" -> logs.clear()
             "close" -> isOpen = false;
-            "exit"  -> System.exit(0)
+            "exit" -> System.exit(0)
+            "loaddata" -> main.load()
             "pizza" -> {
                 main.pizza = !main.pizza // if-else 대신 반전(!) 하나로 끝
                 logs.add("[System] Is very good.")
@@ -60,7 +65,7 @@ class Console(var scopeEngine: ScopeEngineAccess, var main: Main) {
                 if (args.size == 4) handleSet(args)
                 else logs.add("[Console] Usage: set [type] [name] [value]")
             }
-            else -> logs.add("[Console] Error: Unknown command: $cmd")
+            else -> { logs.add("[Console] Error: Unknown command: $cmd"); logs.add("[Console] Try 'help' for more information") }
         }
         buffer.setLength(0)
     }

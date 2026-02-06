@@ -95,6 +95,12 @@ public class Main extends Base {
             case SETTINGS :
                 gm.renderSettings(g,this);
                 break;
+            case MODESELECT:
+                gm.renderModeSelection(g,mode);
+                break;
+            case GAME :
+                gm.renderEngineeringFullView(g);
+                break;
         }
 
 
@@ -108,6 +114,16 @@ public class Main extends Base {
 
     }
 
+    public void back() {
+        if (!(gameScreenState == GameScreenState.MENU)) shutter.changScreen(GameScreenState.MENU);
+        else getExitPopup().setVisible();
+    }
+
+    public void go() {
+        shutter.changScreen(GameScreenState.GAME);
+        // init gameModel
+    }
+
     public SettingManager getSettingManager() { return settingManager; }
 
     public Shutter getShutter() { return shutter; }
@@ -115,6 +131,8 @@ public class Main extends Base {
     public ExitPopup getExitPopup() {return exitPopup;}
 
     public Console getConsole() {return console;}
+
+    public void moveMode() {if (mode == 1) mode = 0; else mode = 1;}
 
     public void load() {
         Properties p = new Properties();
