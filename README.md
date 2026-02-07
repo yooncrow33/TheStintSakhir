@@ -46,7 +46,7 @@
 chmod +x ~/tss/tssrun.sh
 
 # 게임 실행
-tssrun.sh
+tssrun.sh```
 
 ## Window 실행 방법
 ### tss.jar실행.
