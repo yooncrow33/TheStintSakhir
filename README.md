@@ -1,26 +1,52 @@
-# 실행
+# The Stint: Sakhir 실행 가이드
 
-## 맥/리눅스 실행
+본 가이드는 **'The Stint: Sakhir'**를 각 운영체제 환경에서 설치하고 실행하는 방법을 설명합니다.
 
-릴리즈의 tss폴더를 그대로 user.home에 드래그 합니다.
-터미널에 가서 ->
-nano ~/.zshrc
+---
 
-export PATH="$PATH:$HOME/tss
+##  필수 요구 사항
+* **Java 21 JDK** 이상의 버전이 반드시 설치되어 있어야 합니다.
 
-Control + X
+---
 
-source ~/.zshrc
+## macOS / Linux 실행 방법
 
-설정후
+### 1. 파일 배치
+* 다운로드한 `tss` 폴더를 **사용자 홈 디렉토리**(`~/`)로 이동합니다.
+* 터미널을 열었을 때 바로 보이는 위치에 `tss` 폴더가 있어야 합니다.
 
-tssrun.sh 하면 게임이 실행됩니다.
+### 2. 환경 변수(PATH) 설정
+어느 폴더에서든 `tssrun.sh`만 입력해도 게임이 실행되도록 설정합니다.
 
-## 윈도우
+1.  터미널을 열고 다음 명령어를 입력합니다.
+    ```bash
+    nano ~/.zshrc
+    ```
+    *(리눅스 사용자는 `nano ~/.bashrc`를 입력하세요.)*
 
-tss.jar를 실행하십시오.
+2.  파일 맨 아래에 다음 내용을 복사해서 붙여넣습니다 (따옴표 주의):
+    ```bash
+    export PATH="$PATH:$HOME/tss"
+    ```
 
-## 실행시 필요한것
+3.  **저장 및 종료**:
+    * `Control + X` 입력
+    * `Y` 입력
+    * `Enter` 입력
 
-Java 21 JDK
+4.  변경된 설정을 적용합니다.
+    ```bash
+    source ~/.zshrc
+    ```
 
+### 3. 실행 권한 부여 및 게임 시작
+스크립트 파일에 실행 권한을 한 번만 부여하면 됩니다.
+```bash
+# 실행 권한 부여
+chmod +x ~/tss/tssrun.sh
+
+# 게임 실행
+tssrun.sh
+
+## Window 실행 방법
+### tss.jar실행.
