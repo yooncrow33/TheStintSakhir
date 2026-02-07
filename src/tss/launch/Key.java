@@ -14,22 +14,22 @@ public class Key extends KeyBindingBase {
 
     @Override
     protected void onKeyUpPress() {
-        n.up();
+
     }
     @Override
     protected void onKeyLeftPress() {
-        n.left();
+
     }
     @Override
     protected void onKeyDownPress() {
-        n.down();
+
     }
     @Override
     protected void onKeyRightPress() {
-        n.right();
+
     }
     @Override
     protected void onKeyEnterPress() {
-        n.enter();
+
     }
 }

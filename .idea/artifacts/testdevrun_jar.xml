@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="testdevrun:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/testdevrun_jar</output-path>
+    <root id="archive" name="TheStintSakhir.jar">
+      <element id="module-output" name="TheStintSakhir" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib-jdk8/2.1.21/kotlin-stdlib-jdk8-2.1.21.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib/2.1.21/kotlin-stdlib-2.1.21.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/13.0/annotations-13.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib-jdk7/2.1.21/kotlin-stdlib-jdk7-2.1.21.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Scope/out/artifacts/151_jar/Scope.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

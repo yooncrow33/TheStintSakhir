@@ -101,7 +101,7 @@ public class ProfileStart {
 
         String homeDir = System.getProperty("user.home")+ File.separator + "tss" + File.separator + "save";
 
-        String fullPath1 = homeDir + File.separator + "TheGridSakhirProfileIsSet.properties";
+        String fullPath1 = homeDir + File.separator + "TheStintSakhirProfileIsSet.properties";
         String paths[] = {"empty", fullPath1};
 
         try (FileOutputStream out = new FileOutputStream(paths[1])) {

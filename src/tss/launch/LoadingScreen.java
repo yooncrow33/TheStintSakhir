@@ -18,10 +18,6 @@ public class LoadingScreen {
         logo.setForeground(Color.WHITE);
         logo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel powered = new JLabel("Powered by Scope", SwingConstants.CENTER);
-        powered.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
-        powered.setForeground(Color.WHITE);
-
         // 2. JProgressBar 설정 (오늘의 주인공)
 // 2. JProgressBar 설정
         JProgressBar progressBar = new JProgressBar(0, 100);

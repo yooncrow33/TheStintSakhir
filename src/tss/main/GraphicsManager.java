@@ -37,7 +37,7 @@ public class GraphicsManager {
         g.setColor(Color.GRAY);
         g.setFont(new Font("Monospaced", Font.BOLD, 16)); // 고정폭 폰트로 터미널 느낌
         g.drawString("SYSTEM STATUS: OPTIMAL", 55, 245);
-        g.drawString("VERSION: v11-dev-build", 55, 265);
+        g.drawString("VERSION: v12-dev-build", 55, 265);
 
         // 2. SETTING 버튼 (얇은 테두리 스타일)
         g.drawRect(1650, 860, 250, 60);
