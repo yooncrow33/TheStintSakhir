@@ -13,7 +13,7 @@ public class SettingManager {
     String emptyString[] = {"1", "2", "3"};
 
     String settingNames[] = {
-        "Practice Mode", "Race Length", "Difficulty", "Weather", "Empty Setting" };
+            "Practice Mode", "Race Length", "Difficulty", "Weather", "Empty Setting" };
 
     int focus = 5;
 
@@ -43,7 +43,7 @@ public class SettingManager {
                 emptyIndex = value;
                 break;
         }
-        }
+    }
 
     public String getCurrentSettingValue(int index) {
         switch (index) {

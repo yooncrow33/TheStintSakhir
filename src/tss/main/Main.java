@@ -2,11 +2,11 @@ package tss.main;
 
 import scope.Base;
 import tss.main.input.KetListener;
-import tss.main.input.MouseListener;
 import tss.main.manager.SettingManager;
 import tss.main.manager.Shutter;
 import tss.main.object.ExitPopup;
 import tss.main.object.Console;
+import tss.main.object.Race;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +29,8 @@ public class Main extends Base {
     String lastName;
     String driverNumber;
     String nationality;
+
+    Race race;
 
     public boolean pizza = false;
 
@@ -55,10 +57,9 @@ public class Main extends Base {
         settingManager = new SettingManager();
         ketListener = new KetListener(this,this);
         shutter = new Shutter(this);
-        exitPopup = new ExitPopup();
+        exitPopup = new ExitPopup(shutter);
         console = new Console(scopeEngine(), this);
-        MouseListener mouseListener = new MouseListener(this);
-        this.addMouseListener(mouseListener);
+        race = new Race(this);
     }
 
     public void update(double dt) {
@@ -115,13 +116,21 @@ public class Main extends Base {
     }
 
     public void back() {
-        if (!(gameScreenState == GameScreenState.MENU)) shutter.changScreen(GameScreenState.MENU);
-        else getExitPopup().setVisible();
+        if (!(gameScreenState == GameScreenState.MENU)) {
+            if (gameScreenState == GameScreenState.GAME) {
+                getExitPopup().setVisible(1);
+            } else shutter.changScreen(GameScreenState.MENU);
+        }
+        else getExitPopup().setVisible(2);
     }
 
     public void go() {
         shutter.changScreen(GameScreenState.GAME);
         // init gameModel
+    }
+
+    public Race getRace() {
+        return race;
     }
 
     public SettingManager getSettingManager() { return settingManager; }

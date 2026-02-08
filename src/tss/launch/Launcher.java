@@ -21,7 +21,6 @@ public class Launcher {
     JTextArea Area = new JTextArea();
     JScrollPane p = new JScrollPane(Area);
     JTextArea TitleArea = new JTextArea("Manual");
-    //JLabel lable2 = new JLabel("Since it is in the development stage, only the latest version will be executed.");
     String password;
     String login;
     boolean setPass;
@@ -33,35 +32,6 @@ public class Launcher {
     boolean profile3_set = false;
 
     String recent_news = "\n" +
-            /*
-            "이것을 쓴 시점은 런처만 만든 시점임.\n" +
-            "       2025/10/22 -yooncrow33-\n" +
-            "\n" +
-            "alpha 1.3!\n" +
-            "   - 내가 똥같이 싼 코드 치우는중...\n" +
-            "       2025/10/28 -yooncrow33-\n" +
-            "\n" +
-            "alpha 1.8!\n" +
-            "   - 정신 나갈거 같음.\n" +
-            "       2025/11/02 -yooncrow33-\n" +
-            "\n" +
-            "alpha 1.10!\n" +
-            "   - 정신 나갈거 같음...\n" +
-            "       2025/11/10 -yooncrow33-\n" +
-            "\n" +
-            "alpha 1.13!\n" +
-            "   - 정신 나갈거 같음...\n" +
-            "       2026/1/9 -yooncrow33-\n" +
-            "\n" +
-            "alpha 1.13.3!\n" +
-            "   - 끝이 보인다...!\n" +
-            "       2026/1/19 -yooncrow33-\n" +
-            "\n" +
-            "alpha 1.13.5!\n" +
-            "   - 뭐였지?\n" +
-            "       2026/1/21 -yooncrow33-\n" +
-
-             */
             "\n";
 
 
@@ -104,6 +74,10 @@ public class Launcher {
             "dev-12 2/7\n" +
             "   - 맥/리눅스 에서 권한등의 문제를 피하기 위해 .sh로 터미널에서 바로 실행이 가능한 환경구현\n" +
             "   - 트랙 데이터 수집.\n" +
+            "\n" +
+            "dev-13 2/8\n" +
+            "   - 게엠중에 나갈때 경고 매세지가 출력되도록 추가.\n" +
+            "   - 트랙 데이터 완성.\n" +
             "\n";
 
     String manual_text = "\n" +

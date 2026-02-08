@@ -1,21 +1,37 @@
 package tss.main.object;
 
+import tss.main.Main;
+import tss.main.manager.Shutter;
+
 import java.awt.*;
 
 public class ExitPopup {
-    boolean visible = false;
+    int mod = 0;
+    public boolean visible = false;
     boolean isYesSelected = false;
-    public void setVisible() {
+    Shutter s;
+    public ExitPopup(Shutter s) {
+        this.s = s;
+    }
+    public void setVisible(int m) {
+        isYesSelected = false;
         visible = true;
+        mod = m;
+    }
+    public int getM() {
+        return mod;
     }
     public boolean isVisible() {
         return visible;
     }
     public void select() {
+        visible = false;
         if (isYesSelected) {
-            System.exit(0);
-        } else {
-            visible = false;
+            if (mod == 1) {
+                s.changScreen(Main.GameScreenState.MENU);
+            } else {
+                System.exit(0);
+            }
         }
     }
     public void move() {

@@ -37,7 +37,7 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
                 return
             } else {
                 if (main.menuFocus == 2) {
-                    main.getExitPopup().setVisible()
+                    main.getExitPopup().setVisible(2)
                 }
             }
             if (main.menuFocus == 0) {
@@ -49,6 +49,9 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
         }
         if (main.isScreenState(Main.GameScreenState.MODESELECT)) {
             main.go()
+        }
+        if (main.isScreenState(Main.GameScreenState.GAME)) {
+            main.getRace().enter();
         }
     }
 
@@ -62,7 +65,7 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
     }
 
     override fun onKeyLeftPress() {
-        if (main.isScreenState(Main.GameScreenState.MENU) && main.getExitPopup().isVisible()) { main.getExitPopup().move() }
+        if (main.isScreenState(Main.GameScreenState.MENU) || main.isScreenState(Main.GameScreenState.GAME) && main.getExitPopup().isVisible()) { main.getExitPopup().move() }
         if (main.isScreenState(Main.GameScreenState.SETTINGS)) {
             main.getSettingManager().left()
         }
@@ -70,7 +73,7 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
     }
 
     override fun onKeyDownPress() {
-        if (main.isScreenState(Main.GameScreenState.SETTINGS)) { main.getSettingManager().down() }
+        if (main.isScreenState(Main.GameScreenState.SETTINGS))  { main.getSettingManager().down() }
         if (main.isScreenState(Main.GameScreenState.MENU)) {
             if (main.menuFocus < 2) {
                 main.menuFocus++
@@ -79,7 +82,7 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
     }
 
     override fun onKeyRightPress() {
-        if (main.isScreenState(Main.GameScreenState.MENU) && main.getExitPopup().isVisible()) { main.getExitPopup().move() }
+        if (main.isScreenState(Main.GameScreenState.MENU) || main.isScreenState(Main.GameScreenState.GAME) && main.getExitPopup().isVisible()) { main.getExitPopup().move() }
         if (main.isScreenState(Main.GameScreenState.SETTINGS)) {
             main.getSettingManager().right()
         }

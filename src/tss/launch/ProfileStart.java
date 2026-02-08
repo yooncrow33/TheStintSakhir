@@ -149,47 +149,6 @@ public class ProfileStart {
         LoadingScreen.showSplashThenLaunchGame(profileId);
     }
 
-    /*
-            Properties props = new Properties();
-        String homeDir = System.getProperty("user.home")+ File.separator + "SC" + File.separator + "save";
-
-        String fullPath1 = homeDir + File.separator + "IceDropSaveProfile1.properties";
-        String fullPath2 = homeDir + File.separator + "IceDropSaveProfile2.properties";
-        String fullPath3 = homeDir + File.separator + "IceDropSaveProfile3.properties";
-
-        String paths[] = {"empty", fullPath1, fullPath2, fullPath3};
-
-        try (FileInputStream in = new FileInputStream(paths[profileId])) {
-            props.load(in);
-
-            shopManager.loadCoin(Integer.parseInt(props.getProperty("coin", "7")));
-            lastPlayTime = Integer.parseInt(props.getProperty("last", "0"));
-            lastIceBasicCollectCount = Integer.parseInt(props.getProperty("lastIceBasicCollectCount", "0"));
-            lastIceRareCollectCount = Integer.parseInt(props.getProperty("lastIceRareCollectCount", "0"));
-            lastIceLegendaryCollectCount = Integer.parseInt(props.getProperty("lastIceLegendaryCollectCount", "0"));
-            questManager.loadIsCompleted(Boolean.parseBoolean(props.getProperty("thirdQuestCompleted", "false")));
-            skillManager.loadLevel(Integer.parseInt(props.getProperty("level", "1")));
-            skillManager.loadXp(Integer.parseInt(props.getProperty("xp", "0")));
-            skillManager.loadSkillPoint(Integer.parseInt(props.getProperty("skillPoint", "0")));
-            skillManager.loadSkillPointUsed(Integer.parseInt(props.getProperty("skillPointUsed", "0")));
-            skillManager.loadItemCoolTimeLevel(Integer.parseInt(props.getProperty("itemCoolTimeLevel", "0")));
-            skillManager.loadClickOffsetLevel(Integer.parseInt(props.getProperty("clickOffsetLevel", "0")));
-            skillManager.loadIceBasicSpawnChanceLevel(Integer.parseInt(props.getProperty("iceBasicSpawnChanceLevel", "1")));
-            skillManager.loadIceRareSpawnChanceLevel(Integer.parseInt(props.getProperty("iceRareSpawnChanceLevel", "1")));
-            skillManager.loadIceLegendarySpawnChanceLevel(Integer.parseInt(props.getProperty("iceLegendarySpawnChanceLevel", "1")));
-            shopManager.loadIceBasicRushItemCount(Integer.parseInt(props.getProperty("iceBasicRushItemCount", "0")));
-            shopManager.loadIceRareRushItemCount(Integer.parseInt(props.getProperty("iceRareRushItemCount", "0")));
-            shopManager.loadIceLegendaryRushItemCount(Integer.parseInt(props.getProperty("iceLegendaryRushItemCount", "0")));
-            shopManager.loadIceAutoCollectLevel(Integer.parseInt(props.getProperty("iceAutoCollectLevel", "0")));
-            shopManager.loadIceVacuumCount(Integer.parseInt(props.getProperty("iceVacuumCount", "0")));
-            questManager.loadIsRewarded(Boolean.parseBoolean(props.getProperty("thirdQuestReward", "false")));
-
-
-        } catch (IOException | NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "저장파일 인식 실패");
-        }
-     */
-
     public boolean isEmpty(TextField t) {
         return t.getText().trim().isEmpty();
     }
