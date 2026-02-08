@@ -135,7 +135,7 @@ public class Launcher {
             "\n" +
      */
 
-    public Launcher() {
+    public Launcher() throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         load();
         if (file.exists()) {
             try {
@@ -382,7 +382,7 @@ public class Launcher {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         new Launcher();
     }
 }
