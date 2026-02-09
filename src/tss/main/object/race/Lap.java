@@ -6,6 +6,6 @@ public class Lap {
     public int s2TIck = 0;
     public int s3Tick = 0;
     public int tireLoseHealth = 0;
-    public int distance = 0;
-    public int lapTimeTick = 0;
+    public double distance = 0;
+    public double lapTimeTick = 0;
 }

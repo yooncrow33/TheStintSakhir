@@ -1,5 +1,7 @@
 package tss.main;
 
+import tss.main.object.Race;
+
 import java.awt.*;
 
 import static java.awt.Color.blue;
@@ -9,6 +11,26 @@ public class GraphicsManager {
 
     public GraphicsManager(Main main) {
         this.main = main;
+    }
+
+    // 밀리초: 0 ~ 999까지만 반환
+    private int getMs(double tick) {
+        return (int) (( tick * 16) % 1000);
+    }
+
+    // 초: 0 ~ 59까지만 반환
+    private int getSe(double tick) {
+        return (int) ((( tick * 16) / 1000) % 60);
+    }
+
+    // 분: 0 ~ 59까지만 반환
+    private int getMi(double tick) {
+        return (int) ((( tick * 16) / (1000 * 60)) % 60);
+    }
+
+    // 시: 제한 없이 쭉 올라감
+    private int getHo(double tick) {
+        return (int) (( tick * 16) / (1000 * 60 * 60));
     }
 
     public void renderMenu(Graphics g) {
@@ -160,7 +182,7 @@ public class GraphicsManager {
         g.drawString("BACK", 1740, 990); // + 60 / + 40
     }
 
-    public void renderEngineeringFullView(Graphics g) {
+    public void renderEngineeringFullView(Graphics g, Race race) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -292,14 +314,30 @@ public class GraphicsManager {
         // ① 섹터 타임 & 델타
         g2d.setFont(new Font("Monospaced", Font.BOLD, 22));
         g2d.setColor(new Color(240,240,240));
-        g2d.drawString("CUR: --:--.---", rectC.x + 30, 95);
+        //g2d.drawString("CUR: --:--.---", rectC.x + 30, 95);
+        g2d.drawString(String.format("CUR: %02d:%02d.%03d", getMi(race.getPlayerCar().getCurrentLap().lapTimeTick),getSe(race.getPlayerCar().getCurrentLap().lapTimeTick),getMs(race.getPlayerCar().getCurrentLap().lapTimeTick)), rectC.x + 30, 95);
         for(int i=0; i<3; i++) {
             int sy = 140 + (i * 45);
             g2d.setFont(dataFont);
             g2d.setColor(textGray);
             g2d.drawString("SECTOR " + (i+1) + ":", rectC.x + 30, sy);
             g2d.setColor(Color.GREEN);
-            g2d.drawString("--.--- (-0.---)", rectC.x + 130, sy); // [DATA: 섹터타임]
+            switch (i) {
+                case 0:
+                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getCurrentLap().s1Tick), getMs(race.getPlayerCar().getCurrentLap().s1Tick)), rectC.x + 130, sy);
+                    break;
+                case 1:
+                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getCurrentLap().s2TIck), getMs(race.getPlayerCar().getCurrentLap().s2TIck)), rectC.x + 130, sy);
+                    break;
+                case 2:
+                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getCurrentLap().s3Tick), getMs(race.getPlayerCar().getCurrentLap().s3Tick)), rectC.x + 130, sy);
+                    break;
+                default:
+                    g2d.drawString(String.format("%02d.%03d", 2, 2), rectC.x + 130, sy);
+            }
+            System.out.println(race.getPlayerCar().getCurrentLap().distance + "/" + race.getPlayerCar().getCurrentLap().tick);
+
+            //g2d.drawString("--.--- (-0.---)", rectC.x + 130, sy); // [DATA: 섹터타임]
         }
 
         // ② 레이스 페이스 & 날씨 그래프

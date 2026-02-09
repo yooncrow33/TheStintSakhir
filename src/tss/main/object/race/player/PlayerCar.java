@@ -9,13 +9,13 @@ public class PlayerCar {
     final Bahrain circuit;
     Bahrain.partState state;
     ArrayList<Lap> laps = new ArrayList<>();
-    int currentDistance = 0;
+    double currentDistance = 0;
 
     boolean pit = true;
 
-    public int totalDistance;
+    public double totalDistance;
 
-    final int lapDistance = 5412;
+    final double lapDistance = 5412;
 
     public PlayerCar(Bahrain bahrain) {
         circuit = bahrain;
@@ -24,7 +24,7 @@ public class PlayerCar {
 
     public void update() {
         if (currentDistance >= state.getDistance()) {
-            state.getNext(pit);
+            state = state.getNext(pit);
             initPart();
             switch (state) {
                 case straight1 -> initLap();
@@ -34,10 +34,12 @@ public class PlayerCar {
         }
         calculatePhysics();
         getCurrentLap().tick++;
+        updateData();
     }
 
     public void calculatePhysics() {
-         getCurrentLap().distance += state.getDistance() / state.getTick();
+         getCurrentLap().distance += (double) state.getDistance() / state.getTick();
+         currentDistance += (double) state.getDistance() / state.getTick();
     }
 
     public void driverOut() {
@@ -53,7 +55,6 @@ public class PlayerCar {
 
     public void initPart() {
         currentDistance = 0;
-
     }
 
     public void updateData() {
@@ -70,8 +71,13 @@ public class PlayerCar {
     }
 
     public Lap getCurrentLap() {
+        if (laps.isEmpty()) {
+            laps.add(new Lap()); // 비어있으면 하나 넣어주는 센스
+        }
         return laps.get(laps.size() - 1);
     }
+
+    //public Lap getFast
 
     public void init() {
         state = Bahrain.partState.pit ; // 시작은 다시 피트에서

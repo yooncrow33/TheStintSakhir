@@ -60,15 +60,12 @@ public class Main extends Base {
         exitPopup = new ExitPopup(shutter);
         console = new Console(scopeEngine(), this);
         race = new Race(this);
+        race.init();
     }
 
     public void update(double dt) {
         shutter.update();
-    }
-
-    public void click() {
-
-        System.out.println("[EVENT] Mouse clicked");
+        race.update();
     }
 
     public boolean isScreenState(GameScreenState gss) {
@@ -100,7 +97,7 @@ public class Main extends Base {
                 gm.renderModeSelection(g,mode);
                 break;
             case GAME :
-                gm.renderEngineeringFullView(g);
+                gm.renderEngineeringFullView(g, race);
                 break;
         }
 
@@ -126,7 +123,8 @@ public class Main extends Base {
 
     public void go() {
         shutter.changScreen(GameScreenState.GAME);
-        // init gameModel
+        race.init();
+        race.getPlayerCar().driverOut();
     }
 
     public Race getRace() {

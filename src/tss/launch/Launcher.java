@@ -78,6 +78,9 @@ public class Launcher {
             "dev-13 2/8\n" +
             "   - 게엠중에 나갈때 경고 매세지가 출력되도록 추가.\n" +
             "   - 트랙 데이터 완성.\n" +
+            "\n" +
+            "dev-14 2/9\n" +
+            "   - 레이스 로직이 돌아감!\n" +
             "\n";
 
     String manual_text = "\n" +
