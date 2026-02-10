@@ -4,8 +4,6 @@ import tss.main.object.Race;
 
 import java.awt.*;
 
-import static java.awt.Color.blue;
-
 public class GraphicsManager {
     final Main main;
 
@@ -193,11 +191,11 @@ public class GraphicsManager {
         int sideW = 450;  // 사이드바 너비 확대 (정보 가독성 업)
         int bottomH = 350; // 하단 텔레메트리 높이 확대
 
-        Rectangle rectA = new Rectangle(0, 0, sideW, screenH - radioH); // 좌측: 지도 & 리더보드
-        Rectangle rectC = new Rectangle(screenW - sideW, 0, sideW, screenH - radioH); // 우측: 전략 & 환경
-        Rectangle rectB = new Rectangle(sideW, screenH - radioH - bottomH, screenW - (sideW * 2), bottomH); // 하단: 텔레메트리
+        Rectangle A = new Rectangle(0, 0, sideW, screenH - radioH); // 좌측: 지도 & 리더보드
+        Rectangle C = new Rectangle(screenW - sideW, 0, sideW, screenH - radioH); // 우측: 전략 & 환경
+        Rectangle B = new Rectangle(sideW, screenH - radioH - bottomH, screenW - (sideW * 2), bottomH); // 하단: 텔레메트리
         Rectangle rectMain = new Rectangle(sideW, 0, screenW - (sideW * 2), screenH - radioH - bottomH); // 중앙: 메인 콘솔
-        Rectangle rectD = new Rectangle(0, screenH - radioH, screenW, radioH); // 최하단: 라디오
+        Rectangle D = new Rectangle(0, screenH - radioH, screenW, radioH); // 최하단: 라디오
 
         // --- [ 2. 테마 설정 ] ---
         Color accentRed = new Color(255, 50, 30);
@@ -213,53 +211,53 @@ public class GraphicsManager {
         // [구역 A] 좌측 : GPS & 리더보드 (확대됨)
         // -------------------------------------------------------------------------
         g2d.setColor(darkPanel);
-        g2d.fill(rectA);
+        g2d.fill(A);
         g2d.setColor(lineGray);
-        g2d.draw(rectA);
+        g2d.draw(A);
 
         // ① 트랙 진행도 (직선)
         g2d.setColor(accentRed);
         g2d.setFont(headFont);
-        g2d.drawString("GPS TRACK PROGRESS", rectA.x + 25, 45);
+        g2d.drawString("GPS TRACK PROGRESS", A.x + 25, 45);
         g2d.setColor(lineGray);
         g2d.setStroke(new BasicStroke(3));
-        g2d.drawLine(rectA.x + 30, 90, rectA.x + sideW - 30, 90);
-        g2d.fillOval(rectA.x + 30 + (int)(0.7 * 390), 82, 16, 16);
+        g2d.drawLine(A.x + 30, 90, A.x + sideW - 30, 90);
+        g2d.fillOval(A.x + 30 + (int)(0.7 * 390), 82, 16, 16);
 
         // ② 리더보드 (20인 정밀 리스트)
         g2d.setFont(headFont);
         g2d.setColor(accentRed);
-        g2d.drawString("LIVE LEADERBOARD", rectA.x + 25, 150);
+        g2d.drawString("LIVE LEADERBOARD", A.x + 25, 150);
         g2d.setFont(new Font("Monospaced", Font.BOLD, 15));
         g2d.setColor(textGray);
-        g2d.drawString("POS  DRIVER         TYRE   GAP/INT", rectA.x + 25, 185);
+        g2d.drawString("POS  DRIVER         TYRE   GAP/INT", A.x + 25, 185);
 
         for (int i = 0; i < 20; i++) {
             int rowY = 220 + (i * 38);
             g2d.setColor(new Color(30, 30, 30));
-            g2d.drawLine(rectA.x + 20, rowY + 8, rectA.x + sideW - 20, rowY + 8);
+            g2d.drawLine(A.x + 20, rowY + 8, A.x + sideW - 20, rowY + 8);
             g2d.setColor(new Color(240,240,240));
             // [DATA: 순위, 드라이버, 타이어, 갭 실시간 데이터 연결]
-            g2d.drawString(String.format("%02d   DRV_%-10s [%s]    +%.3f", i+1, "---", "-", 0.0), rectA.x + 25, rowY);
+            g2d.drawString(String.format("%02d   DRV_%-10s [%s]    +%.3f", i+1, "---", "-", 0.0), A.x + 25, rowY);
         }
 
         // -------------------------------------------------------------------------
         // [구역 B] 중앙 하단 : 초정밀 텔레메트리 (확대됨)
         // -------------------------------------------------------------------------
         g2d.setColor(new Color(30, 30, 30));
-        g2d.fill(rectB);
+        g2d.fill(B);
         g2d.setColor(lineGray);
-        g2d.draw(rectB);
+        g2d.draw(B);
 
         g2d.setColor(accentRed);
         g2d.setFont(headFont);
-        g2d.drawString("SYSTEM TELEMETRY : SCOPE_LINK", rectB.x + 20, rectB.y + 40);
+        g2d.drawString("SYSTEM TELEMETRY : SCOPE_LINK", B.x + 20, B.y + 40);
 
         // ① 타이어 모니터 (간격 최적화)
         String[] tNames = {"FL", "FR", "RL", "RR"};
         for (int i = 0; i < 4; i++) {
-            int tx = rectB.x + 30 + (i * 110);
-            int ty = rectB.y + 70;
+            int tx = B.x + 30 + (i * 110);
+            int ty = B.y + 70;
             g2d.setColor(lineGray);
             g2d.drawRect(tx, ty, 90, 180);
             g2d.setFont(subFont);
@@ -277,10 +275,10 @@ public class GraphicsManager {
         }
 
         // ② 엔진 & 에어로 미니 모듈 (그리드화)
-        int modX = rectB.x + 500;
+        int modX = B.x + 500;
         for (int i = 0; i < 8; i++) {
             int mx = modX + (i % 4 * 120);
-            int my = rectB.y + 70 + (i / 4 * 65);
+            int my = B.y + 70 + (i / 4 * 65);
             g2d.setColor(lineGray);
             g2d.drawRect(mx, my, 110, 55);
             g2d.setFont(new Font("Impact", Font.PLAIN, 17));
@@ -292,68 +290,66 @@ public class GraphicsManager {
         }
 
         g.setColor(new Color(50,50,50));
-        g.fillRect(rectB.x + 500, rectB.y + 200, 475, 80);
+        g.fillRect(B.x + 500, B.y + 200, 475, 80);
         g.setFont(new Font("Impact", Font.BOLD,24));
         g.setColor(new Color(240,240,240));
-        g.drawString("ERS", rectB.x + 510, rectB.y + 230);
+        g.drawString("ERS", B.x + 510, B.y + 230);
         g.setColor(new Color(240,200,50));
-        g.fillRect(rectB.x + 505,  rectB.y + 245, 465, 30);
+        g.fillRect(B.x + 505,  B.y + 245, 465, 30);
 
         // -------------------------------------------------------------------------
         // [구역 C] 우측 : 전략 분석 & 환경 (확대됨)
         // -------------------------------------------------------------------------
         g2d.setColor(darkPanel);
-        g2d.fill(rectC);
+        g2d.fill(C);
         g2d.setColor(lineGray);
-        g2d.draw(rectC);
+        g2d.draw(C);
 
         g2d.setColor(accentRed);
         g2d.setFont(headFont);
-        g2d.drawString("STRATEGIC ANALYSIS", rectC.x + 25, 45);
+        g2d.drawString("STRATEGIC ANALYSIS", C.x + 25, 45);
 
         // ① 섹터 타임 & 델타
         g2d.setFont(new Font("Monospaced", Font.BOLD, 22));
         g2d.setColor(new Color(240,240,240));
-        //g2d.drawString("CUR: --:--.---", rectC.x + 30, 95);
-        g2d.drawString(String.format("CUR: %02d:%02d.%03d", getMi(race.getPlayerCar().getCurrentLap().lapTimeTick),getSe(race.getPlayerCar().getCurrentLap().lapTimeTick),getMs(race.getPlayerCar().getCurrentLap().lapTimeTick)), rectC.x + 30, 95);
+        //g2d.drawString("CUR: --:--.---", C.x + 30, 95);
+        g2d.drawString(String.format("CUR: %02d:%02d.%03d", getMi(race.getPlayerCar().getCurrentLap().tick),getSe(race.getPlayerCar().getCurrentLap().tick),getMs(race.getPlayerCar().getCurrentLap().tick)), C.x + 30, 95);
         for(int i=0; i<3; i++) {
             int sy = 140 + (i * 45);
             g2d.setFont(dataFont);
             g2d.setColor(textGray);
-            g2d.drawString("SECTOR " + (i+1) + ":", rectC.x + 30, sy);
+            g2d.drawString("SECTOR " + (i+1) + ":", C.x + 30, sy);
             g2d.setColor(Color.GREEN);
             switch (i) {
                 case 0:
-                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getCurrentLap().s1Tick), getMs(race.getPlayerCar().getCurrentLap().s1Tick)), rectC.x + 130, sy);
+                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getCurrentLap().getCurrents1Tick()), getMs(race.getPlayerCar().getCurrentLap().getCurrents1Tick())), C.x + 130, sy);
                     break;
                 case 1:
-                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getCurrentLap().s2TIck), getMs(race.getPlayerCar().getCurrentLap().s2TIck)), rectC.x + 130, sy);
+                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getCurrentLap().getCurrents2Tick()), getMs(race.getPlayerCar().getCurrentLap().getCurrents2Tick())), C.x + 130, sy);
                     break;
                 case 2:
-                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getCurrentLap().s3Tick), getMs(race.getPlayerCar().getCurrentLap().s3Tick)), rectC.x + 130, sy);
+                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getCurrentLap().getCurrents3Tick()), getMs(race.getPlayerCar().getCurrentLap().getCurrents3Tick())), C.x + 130, sy);
                     break;
                 default:
-                    g2d.drawString(String.format("%02d.%03d", 2, 2), rectC.x + 130, sy);
+                    g2d.drawString(String.format("%02d.%03d", 2, 2), C.x + 130, sy);
             }
-            System.out.println(race.getPlayerCar().getCurrentLap().distance + "/" + race.getPlayerCar().getCurrentLap().tick);
-
-            //g2d.drawString("--.--- (-0.---)", rectC.x + 130, sy); // [DATA: 섹터타임]
+            //g2d.drawString("--.--- (-0.---)", C.x + 130, sy); // [DATA: 섹터타임]
         }
 
         // ② 레이스 페이스 & 날씨 그래프
         int graphY = 320;
         g2d.setColor(accentRed);
         g2d.setFont(headFont);
-        g2d.drawString("ENVIRONMENTAL FORECAST", rectC.x + 25, graphY);
+        g2d.drawString("ENVIRONMENTAL FORECAST", C.x + 25, graphY);
         g2d.setColor(new Color(30, 30, 30));
-        g2d.fillRect(rectC.x + 25, graphY + 30, sideW - 50, 200);
+        g2d.fillRect(C.x + 25, graphY + 30, sideW - 50, 200);
         g2d.setColor(lineGray);
-        g2d.drawRect(rectC.x + 25, graphY + 30, sideW - 50, 200);
+        g2d.drawRect(C.x + 25, graphY + 30, sideW - 50, 200);
         // [DATA: 웨더 그래프 Polyline 구현]
 
         // ③ 환경 세부 데이터 모듈
         for(int i=0; i<4; i++) {
-            int ex = rectC.x + 25 + (i % 2 * 205);
+            int ex = C.x + 25 + (i % 2 * 205);
             int ey = graphY + 250 + (i / 2 * 65);
             g2d.setColor(lineGray);
             g2d.drawRect(ex, ey, 195, 55);
@@ -373,28 +369,22 @@ public class GraphicsManager {
         g2d.setStroke(new BasicStroke(4));
         g2d.draw(rectMain);
 
-        g2d.setFont(new Font("Impact", Font.ITALIC, 48));
-        g2d.drawString("COMMAND CONSOLE", rectMain.x + 40, rectMain.y + 70);
-        g2d.setFont(subFont);
-        g2d.setColor(textGray);
-        g2d.drawString("INPUT SYSTEM READY... WAITING FOR USER ACTION", rectMain.x + 45, rectMain.y + 100);
-
         // [이곳에 나중에 조작용 큰 버튼들이나 GUI 요소가 들어갈 것임]
 
         // -------------------------------------------------------------------------
         // [구역 D] 최하단 : 라디오 로그
         // -------------------------------------------------------------------------
         g2d.setColor(new Color(30, 30, 30));
-        g2d.fill(rectD);
+        g2d.fill(D);
         g2d.setColor(accentRed);
         g2d.setStroke(new BasicStroke(2));
-        g2d.drawLine(0, rectD.y, screenW, rectD.y);
+        g2d.drawLine(0, D.y, screenW, D.y);
 
         g2d.setFont(new Font("Dialog", Font.BOLD, 22));
         g2d.setColor(Color.YELLOW);
-        g2d.drawString("(DRIVER)  : ---", 60, rectD.y + 40);
+        g2d.drawString("(DRIVER)  : ---", 60, D.y + 40);
         g2d.setColor(new Color(240,240,240));
-        g2d.drawString("(ENGINEER): ---", 60, rectD.y + 80);
+        g2d.drawString("(ENGINEER): ---", 60, D.y + 80);
     }
 
     public void renderModeSelection(Graphics g, int selectedOption) {

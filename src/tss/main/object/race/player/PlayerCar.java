@@ -11,7 +11,7 @@ public class PlayerCar {
     ArrayList<Lap> laps = new ArrayList<>();
     double currentDistance = 0;
 
-    boolean pit = true;
+    boolean pit = false;
 
     public double totalDistance;
 
@@ -34,6 +34,7 @@ public class PlayerCar {
         }
         calculatePhysics();
         getCurrentLap().tick++;
+        System.out.println(getCurrentLap().tick + "/" + laps.size());
         updateData();
     }
 
@@ -48,8 +49,9 @@ public class PlayerCar {
     }
 
     public void initLap() {
-        getCurrentLap().s3Tick = (getCurrentLap().tick - getCurrentLap().s1Tick) - getCurrentLap().s2TIck;
+        getCurrentLap().s3Tick = (getCurrentLap().tick - getCurrentLap().s1Tick) - getCurrentLap().s2Tick;
         getCurrentLap().lapTimeTick = getCurrentLap().tick;
+        getCurrentLap().isSector3ended = true;
         laps.add(new Lap());
     }
 
@@ -65,8 +67,10 @@ public class PlayerCar {
     public void setCurrentSector(int s) {
         if (s == 1) {
             getCurrentLap().s1Tick = getCurrentLap().tick;
+            getCurrentLap().isSector1ended = true;
         } else if (s == 2) {
-            getCurrentLap().s2TIck = getCurrentLap().tick - getCurrentLap().s1Tick;
+            getCurrentLap().s2Tick = getCurrentLap().tick - getCurrentLap().s1Tick;
+            getCurrentLap().isSector2ended = true;
         }
     }
 
@@ -77,7 +81,28 @@ public class PlayerCar {
         return laps.get(laps.size() - 1);
     }
 
-    //public Lap getFast
+    public Lap getLastLap() {
+        if (laps.size() <= 1) {
+            return getCurrentLap();
+        } else {
+            return laps.get(laps.size() - 2);
+        }
+    }
+
+    public int getFastestLap() {
+        if (laps == null || laps.isEmpty()) return 0;
+
+        // 첫 번째 데이터를 기준점으로 잡으면 990000 같은 임의의 숫자가 필요 없어요.
+        int fastestTick = laps.get(0).tick;
+
+        for (int i = 1; i < laps.size(); i++) {
+            int currentTick = laps.get(i).tick;
+            if (currentTick < fastestTick) {
+                fastestTick = currentTick;
+            }
+        }
+        return fastestTick;
+    }
 
     public void init() {
         state = Bahrain.partState.pit ; // 시작은 다시 피트에서

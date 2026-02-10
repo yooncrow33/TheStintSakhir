@@ -55,11 +55,11 @@ public class Main extends Base {
     public void init() {
         gm = new GraphicsManager(this);
         settingManager = new SettingManager();
-        ketListener = new KetListener(this,this);
+        race = new Race(this);
+        ketListener = new KetListener(this,this, race);
         shutter = new Shutter(this);
         exitPopup = new ExitPopup(shutter);
         console = new Console(scopeEngine(), this);
-        race = new Race(this);
         race.init();
     }
 
@@ -98,6 +98,7 @@ public class Main extends Base {
                 break;
             case GAME :
                 gm.renderEngineeringFullView(g, race);
+                race.render(g);
                 break;
         }
 

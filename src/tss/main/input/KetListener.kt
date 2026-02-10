@@ -2,12 +2,13 @@ package tss.main.input
 
 import scope.KeyBindingBase
 import tss.main.Main
+import tss.main.`object`.Race
 import java.awt.KeyEventDispatcher
 import java.awt.KeyboardFocusManager
 import java.awt.event.KeyEvent
 import javax.swing.JComponent
 
-class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
+class KetListener(comp: JComponent, var main: Main, var race: Race) : KeyBindingBase(comp) {
     init {
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(KeyEventDispatcher { e: KeyEvent? ->
             if (e!!.getID() == KeyEvent.KEY_TYPED && main.getConsole().isOpen) {
@@ -62,6 +63,7 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
                 main.menuFocus--
             } else main.menuFocus = 2
         }
+        if (main.isScreenState(Main.GameScreenState.GAME)) {race.up()}
     }
 
     override fun onKeyLeftPress() {
@@ -70,6 +72,8 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
             main.getSettingManager().left()
         }
         if (main.isScreenState(Main.GameScreenState.MODESELECT)) {main.moveMode()}
+
+        if (main.isScreenState(Main.GameScreenState.GAME)) {race.left()}
     }
 
     override fun onKeyDownPress() {
@@ -79,6 +83,8 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
                 main.menuFocus++
             } else main.menuFocus = 0
         }
+
+        if (main.isScreenState(Main.GameScreenState.GAME)) {race.down()}
     }
 
     override fun onKeyRightPress() {
@@ -87,6 +93,8 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
             main.getSettingManager().right()
         }
         if (main.isScreenState(Main.GameScreenState.MODESELECT)) {main.moveMode()}
+
+        if (main.isScreenState(Main.GameScreenState.GAME)) {race.right()}
     }
 
     override fun onKeyBackspacePress() {
