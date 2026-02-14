@@ -60,7 +60,8 @@ public class Main extends Base {
         shutter = new Shutter(this);
         exitPopup = new ExitPopup(shutter);
         console = new Console(scopeEngine(), this);
-        race.init();
+
+        System.out.println(getTitle());
     }
 
     public void update(double dt) {
@@ -125,7 +126,6 @@ public class Main extends Base {
     public void go() {
         shutter.changScreen(GameScreenState.GAME);
         race.init();
-        race.getPlayerCar().driverOut();
     }
 
     public Race getRace() {

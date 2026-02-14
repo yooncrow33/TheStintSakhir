@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Laps extends Screen {
     public Laps(IDisplay iDisplay) {
-        super(iDisplay);
+        super(iDisplay, "Laps");
         super.env.getConfigs().add(new Config("NVidia Fuck You", 20,0));
         super.env.getConfigs().add(new Config("setting 2", 20, -20));
     }

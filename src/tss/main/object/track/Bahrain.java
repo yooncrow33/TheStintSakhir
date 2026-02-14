@@ -33,7 +33,7 @@ public class Bahrain {
         turn14exit(114, t10s*2 + t01s*3,"straight5"), //1:23.9 4994
         straight5(418, t10s*6 + t01s*2 - 60,"straight1"), //1:29.179 5412 s3 end
 
-        pit(575, t10s*22, "straight1");
+        pit(575 + 418, t10s*22, "turn1entry");
 
         //this is default lap time
         private final int distance; // 거리 (미터)

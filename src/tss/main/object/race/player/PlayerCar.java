@@ -17,12 +17,15 @@ public class PlayerCar {
 
     final double lapDistance = 5412;
 
+    public boolean run = false;
+
     public PlayerCar(Bahrain bahrain) {
         circuit = bahrain;
         state = Bahrain.partState.pit;
     }
 
     public void update() {
+        if (!run) return;
         if (currentDistance >= state.getDistance()) {
             state = state.getNext(pit);
             initPart();
@@ -89,6 +92,11 @@ public class PlayerCar {
         }
     }
 
+    public Lap getOnDisplayLap() {
+        if (getCurrentLap().isSector1ended) return getCurrentLap();
+        else return getLastLap();
+    }
+
     public int getFastestLap() {
         if (laps == null || laps.isEmpty()) return 0;
 
@@ -109,7 +117,11 @@ public class PlayerCar {
         currentDistance = 0;
         totalDistance = 0;
         laps.clear()     ;             // 기록 싹 비우기
-        laps.add(new Lap())  ;              // 첫 랩 다시 넣어주기
-        pit = true;
+        pit = false;
+        run = true;
+    }
+
+    public void exit() {
+        run = false;
     }
 }

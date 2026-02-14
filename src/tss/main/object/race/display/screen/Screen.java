@@ -10,12 +10,17 @@ import java.util.ArrayList;
 abstract public class Screen {
     final int width = 1020;
     final int height = 630;
+    public final String name;
     public abstract void render(Graphics g, int x, int y);
     Env env;
 
-    public Screen(IDisplay iDisplay) {
+    public Screen(IDisplay iDisplay, String name) {
         this.env = new Env(iDisplay);
+        this.name = name;
     }
+
+    public void setFocusIndexFirst() {env.focusIndex = 0;}
+    public void setFocusIndexLast() {env.focusIndex = env.getConfigs().size() - 1; }
 
     public void up() {
         env.up();

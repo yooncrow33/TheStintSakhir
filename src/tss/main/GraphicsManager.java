@@ -313,7 +313,8 @@ public class GraphicsManager {
         g2d.setFont(new Font("Monospaced", Font.BOLD, 22));
         g2d.setColor(new Color(240,240,240));
         //g2d.drawString("CUR: --:--.---", C.x + 30, 95);
-        g2d.drawString(String.format("CUR: %02d:%02d.%03d", getMi(race.getPlayerCar().getCurrentLap().tick),getSe(race.getPlayerCar().getCurrentLap().tick),getMs(race.getPlayerCar().getCurrentLap().tick)), C.x + 30, 95);
+        boolean lastLap = (race.getPlayerCar().getCurrentLap().isSector1ended);
+        g2d.drawString(String.format("CUR: %02d:%02d.%03d", getMi(race.getPlayerCar().getOnDisplayLap().tick),getSe(race.getPlayerCar().getOnDisplayLap().tick),getMs(race.getPlayerCar().getOnDisplayLap().tick)), C.x + 30, 95);
         for(int i=0; i<3; i++) {
             int sy = 140 + (i * 45);
             g2d.setFont(dataFont);
@@ -322,13 +323,13 @@ public class GraphicsManager {
             g2d.setColor(Color.GREEN);
             switch (i) {
                 case 0:
-                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getCurrentLap().getCurrents1Tick()), getMs(race.getPlayerCar().getCurrentLap().getCurrents1Tick())), C.x + 130, sy);
+                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getOnDisplayLap().getCurrents1Tick()), getMs(race.getPlayerCar().getOnDisplayLap().getCurrents1Tick())), C.x + 130, sy);
                     break;
                 case 1:
-                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getCurrentLap().getCurrents2Tick()), getMs(race.getPlayerCar().getCurrentLap().getCurrents2Tick())), C.x + 130, sy);
+                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getOnDisplayLap().getCurrents2Tick()), getMs(race.getPlayerCar().getOnDisplayLap().getCurrents2Tick())), C.x + 130, sy);
                     break;
                 case 2:
-                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getCurrentLap().getCurrents3Tick()), getMs(race.getPlayerCar().getCurrentLap().getCurrents3Tick())), C.x + 130, sy);
+                    g2d.drawString(String.format("%02d.%03d", getSe(race.getPlayerCar().getOnDisplayLap().getCurrents3Tick()), getMs(race.getPlayerCar().getOnDisplayLap().getCurrents3Tick())), C.x + 130, sy);
                     break;
                 default:
                     g2d.drawString(String.format("%02d.%03d", 2, 2), C.x + 130, sy);
