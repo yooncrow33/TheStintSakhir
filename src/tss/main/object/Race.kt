@@ -8,10 +8,9 @@ import java.awt.Graphics
 
 class Race(main: Main) {
     val bahrain  : Bahrain = Bahrain()
-    var playerCar : PlayerCar = PlayerCar(bahrain)
-    val main : Main = main
     val display : Display = Display(this)
-
+    var playerCar : PlayerCar = PlayerCar(bahrain,display)
+    val main : Main = main
     fun update() {
         playerCar.update()
         display.update()

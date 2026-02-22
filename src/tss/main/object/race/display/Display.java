@@ -1,9 +1,7 @@
 package tss.main.object.race.display;
 
 import tss.main.object.Race;
-import tss.main.object.race.display.screen.Laps;
-import tss.main.object.race.display.screen.Screen;
-import tss.main.object.race.display.screen.Setup;
+import tss.main.object.race.display.screen.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,18 +24,28 @@ public class Display implements IDisplay {
     Race race;
 
     ArrayList<Screen> screens = new ArrayList<>();
-    Laps laps = new Laps(this);
-    Setup setup = new Setup(this);
 
     public Display(Race race) {
-        this.race=  race;
+        this.race = race;
+        Laps laps = new Laps(this);
+        Tyre tyre = new Tyre(this);
+        Pit pit = new Pit(this);
+        Setup setup = new Setup(this);
+        Pace pace = new Pace(this);
         screens.add(laps);
+        screens.add(tyre);
+        screens.add(pit);
         screens.add(setup);
+        screens.add(pace);
     }
     public void render(Graphics g) {
         g.setFont(new Font("Impact", Font.BOLD, 42));
         g.drawString(screens.get(tabState.ordinal()).name,x + 10, y + 42);
         screens.get(tabState.ordinal()).render(g,x,y + 50);
+    }
+
+    public Screen getScreen() {
+        return screens.get(tabState.ordinal());
     }
 
     @Override
@@ -46,7 +54,7 @@ public class Display implements IDisplay {
             case laps -> tabState = TabState.tire;
             case tire -> tabState = TabState.pit;
             case pit -> tabState = TabState.setup;
-            case  setup-> tabState = TabState.pace;
+            case setup -> tabState = TabState.pace;
             case pace -> tabState = TabState.laps;
         }
         screens.get(tabState.ordinal()).setFocusIndexLast();

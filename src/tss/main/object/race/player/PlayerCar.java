@@ -1,12 +1,14 @@
 package tss.main.object.race.player;
 
 import tss.main.object.race.Lap;
+import tss.main.object.race.display.Display;
 import tss.main.object.track.Bahrain;
 
 import java.util.ArrayList;
 
 public class PlayerCar {
     final Bahrain circuit;
+    final Display display;
     Bahrain.partState state;
     ArrayList<Lap> laps = new ArrayList<>();
     double currentDistance = 0;
@@ -17,19 +19,32 @@ public class PlayerCar {
 
     final double lapDistance = 5412;
 
-    public boolean run = false;
+    Lap emptyLap = new Lap();
 
-    public PlayerCar(Bahrain bahrain) {
+    enum CarState {
+        IN_GARAGE,  // 차고 안
+        PIT_OUTING, // 피트 나가는 중
+        ON_TRACK,   // 서킷 주행 중
+        PIT   // 피트 들어오는 중
+    }
+
+    CarState carState = CarState.IN_GARAGE;
+
+    public PlayerCar(Bahrain bahrain, Display display) {
         circuit = bahrain;
+        this.display = display;
         state = Bahrain.partState.pit;
     }
 
     public void update() {
-        if (!run) return;
+        resetActionPlag();
+        if (!isRun()) return;
         if (currentDistance >= state.getDistance()) {
             state = state.getNext(pit);
+            if (state == Bahrain.partState.pit) carState = CarState.PIT;
             initPart();
             switch (state) {
+                case turn1entry -> carState = CarState.ON_TRACK;
                 case straight1 -> initLap();
                 case turn5snake -> setCurrentSector(1);
                 case turn13entry -> setCurrentSector(2);
@@ -46,9 +61,17 @@ public class PlayerCar {
          currentDistance += (double) state.getDistance() / state.getTick();
     }
 
+    public void resetActionPlag() {
+        if (display.getScreen().getEnv().getActions().get(0).consumeAction()) {
+            if (!(state == Bahrain.partState.pit) || isDriverOuting()) return;
+            driverOut();
+        }
+    }
+
     public void driverOut() {
         state = Bahrain.partState.pit;
         laps.add(new Lap());
+        carState = CarState.PIT_OUTING;
     }
 
     public void initLap() {
@@ -79,7 +102,7 @@ public class PlayerCar {
 
     public Lap getCurrentLap() {
         if (laps.isEmpty()) {
-            laps.add(new Lap()); // 비어있으면 하나 넣어주는 센스
+            return emptyLap;
         }
         return laps.get(laps.size() - 1);
     }
@@ -118,10 +141,17 @@ public class PlayerCar {
         totalDistance = 0;
         laps.clear()     ;             // 기록 싹 비우기
         pit = false;
-        run = true;
+
     }
 
     public void exit() {
-        run = false;
+
+    }
+
+    boolean isRun() {
+        return !(carState == CarState.IN_GARAGE);
+    }
+    boolean isDriverOuting() {
+        return carState == CarState.PIT_OUTING;
     }
 }

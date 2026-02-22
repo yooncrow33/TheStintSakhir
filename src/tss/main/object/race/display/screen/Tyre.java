@@ -5,27 +5,19 @@ import tss.main.object.race.display.Config;
 import tss.main.object.race.display.IDisplay;
 
 import java.awt.*;
-import java.util.ArrayList;
 
-public class Setup extends Screen {
-    public Setup(IDisplay iDisplay) {
-        super(iDisplay, "Setup");
-        super.env.getConfigs().add(new Config("Front wing", 20,0));
-        super.env.getConfigs().add(new Config("Rear wing", 20, -20));
-        super.env.getConfigs().add(new Config("Anti roll bar F", 20,0));
-        super.env.getConfigs().add(new Config("Anti roll bar R", 20, -20));
-        super.env.getConfigs().add(new Config("Differential", 20,0));
-        super.env.getConfigs().add(new Config("Brake bias", 20, -20));
-        super.env.getConfigs().add(new Config("Ride Height", 20,0));
-        super.env.getConfigs().add(new Config("Suspension Spring", 20, -20));
-        super.env.getConfigs().add(new Config("Camber", 20, -20));
-        super.env.getActions().add(new Action("Confirm Setup"));
+public class Tyre extends Screen {
+    public Tyre(IDisplay iDisplay) {
+        super(iDisplay, "Tyre");
+        super.env.getConfigs().add(new Config("Tyre Select", 2,0));
+        super.env.getConfigs().add(new Config("Tyre Pressure", 2,0));
+        super.env.getActions().add(new Action("Pit in for tire change."));
     }
     @Override
     public void render(Graphics g, int x, int y) {
         int sy2 = 0;
         for (int i = 0; super.env.getConfigs().size() > i; i++) {
-            int sx = x + 10; int sy = y + 10; int slotHeight = 30; int rowHeight = 50; int selectorWidth = 400;
+            int sx = x + 10; int sy = y + 10; int slotHeight = 30; int rowHeight = 60; int selectorWidth = 400;
             boolean isFocus = super.env.focusIndex == i;
             int currentY = sy + 40 + (i * rowHeight);
             if (isFocus) {
@@ -54,11 +46,10 @@ public class Setup extends Screen {
             g.setFont(new Font("Monospaced", Font.BOLD, 30));
             g.drawString(">", sx + 550 + selectorWidth - 30, currentY);
 
-            sy2 = currentY + 10;
-
+            sy2 = currentY + 20;
         }
         for (int i = 0; super.env.getActions().size() > i; i++) {
-            int sx = x + 10; int sy = sy2; int slotHeight = 30; int rowHeight = 50; int selectorWidth = 400;
+            int sx = x + 10; int sy = sy2; int slotHeight = 30; int rowHeight = 60; int selectorWidth = 400;
             int configOffset = env.getConfigs().size();
             boolean isFocus = (env.focusIndex == (configOffset + i));
             int currentY = sy + 40 + (i * rowHeight);
@@ -84,5 +75,4 @@ public class Setup extends Screen {
             g.drawString("[ENTER]", sx + 420 + selectorWidth - 30, currentY);
         }
     }
-
 }

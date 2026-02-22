@@ -12,7 +12,7 @@ public class Laps extends Screen {
         super(iDisplay, "Laps");
         super.env.getConfigs().add(new Config("NVidia Fuck You", 20,0));
         super.env.getConfigs().add(new Config("setting 2", 20, -20));
-        super.env.getActions().add(new Action("test"));
+        super.env.getActions().add(new Action("Driver out for drive."));
     }
     @Override
     public void render(Graphics g, int x, int y) {
@@ -70,12 +70,10 @@ public class Laps extends Screen {
             g.setFont(new Font("Impact", Font.PLAIN, 28));
             g.drawString(super.env.getActions().get(i).name, sx + 20, currentY);
 
-
-            // 현재 값 (중앙 정렬 느낌을 위해 Monospaced 권장)
-            g.setColor(isFocus ? new Color(240,240,240) : Color.DARK_GRAY);
-            g.setFont(new Font("Monospaced", Font.BOLD, 24));
-            // 값의 길이에 상관없이 일정 위치에 출력
-            g.drawString(super.env.getActions().get(i).getName(), sx + 550 + 50, currentY - 2);
+            // 오른쪽 화살표 [>]
+            g.setColor(isFocus ? new Color(255, 50, 30) : Color.GRAY);
+            g.setFont(new Font("Monospaced", Font.BOLD, 30));
+            g.drawString("[ENTER]", sx + 420 + selectorWidth - 30, currentY);
         }
     }
 }

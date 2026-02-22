@@ -22,6 +22,8 @@ abstract public class Screen {
     public void setFocusIndexFirst() {env.focusIndex = 0;}
     public void setFocusIndexLast() {env.focusIndex = env.getConfigs().size() - 1; }
 
+    public Env getEnv() {return env;}
+
     public void up() {
         env.up();
     }
