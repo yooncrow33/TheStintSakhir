@@ -21,6 +21,11 @@ public class PlayerCar {
 
     Lap emptyLap = new Lap();
 
+    //physics
+    double effectiveTick = 0;
+    double speedPerTick = 0;
+    double pace = 0;
+
     enum CarState {
         IN_GARAGE,  // 차고 안
         PIT_OUTING, // 피트 나가는 중
@@ -51,14 +56,34 @@ public class PlayerCar {
             }
         }
         calculatePhysics();
+        currentDistance += speedPerTick;
+        getCurrentLap().distance += speedPerTick;
         getCurrentLap().tick++;
         System.out.println(getCurrentLap().tick + "/" + laps.size());
         updateData();
     }
 
     public void calculatePhysics() {
-         getCurrentLap().distance += (double) state.getDistance() / state.getTick();
-         currentDistance += (double) state.getDistance() / state.getTick();
+        // 1. 각 요소별 페널티 합산
+      /*  double tirePenalty = (frontWear * state.getFWearWeight()) + (rearWear * state.getRWearWeight());
+        double fuelPenalty = currentFuel * state.getFuelWeight();
+        double setupPenalty = Math.abs(carSetup - state.idealSetup) * state.setupWeight; // 셋업 안 맞을수록 손
+        double battlePenalty = (isBattling ? 0.010 : 0.0) * state.getBattleWeight();
+        double generalPenalty = (1.0 - driverPace) * state.paceWeight; // 드라이버 컨디션 등
+
+        // 2. 모든 페널티를 통합한 최종 보정 계수 (1.0이 기본, 높을수록 느려짐)
+        // 수식은 밸런스를 보면서 조절 필요 (예: 기본 틱에 0.1%씩 추가 등)
+        double finalEffect = 1.0 + (tirePenalty + fuelPenalty + setupPenalty + generalPenalty + battlePenalty);
+
+        // 3. 실제 주행 틱 계산
+        double effectiveTick = state.getTick() * finalEffect;
+        double speedPerTick = (double) state.getDistance() / effectiveTick;
+
+       */
+    }
+
+    public void updatePace() {
+       // pace =
     }
 
     public void resetActionPlag() {
