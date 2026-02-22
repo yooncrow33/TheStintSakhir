@@ -34,4 +34,10 @@ abstract public class Screen {
     public void right() {
         env.right();
     }
+    public void action() {
+        env.action();
+    }
+    public void update() {
+        env.update();
+    }
 }

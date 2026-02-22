@@ -8,6 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
-    <orderEntry type="library" name="Scope" level="project" />
+    <orderEntry type="library" name="Scope alpha 1.5.3" level="project" />
   </component>
 </module>

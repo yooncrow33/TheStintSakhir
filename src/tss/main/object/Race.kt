@@ -13,7 +13,8 @@ class Race(main: Main) {
     val display : Display = Display(this)
 
     fun update() {
-        playerCar.update();
+        playerCar.update()
+        display.update()
     }
 
     fun render(g : Graphics) {
@@ -42,5 +43,6 @@ class Race(main: Main) {
 
     fun enter() {
         if (main.exitPopup.isVisible && main.exitPopup.m == 1) main.exitPopup.select()
+        display.action()
     }
 }

@@ -14,14 +14,14 @@ public class Display implements IDisplay {
     final int width = 1020;
     final int height = 630;
 
-    enum TapState {
+    enum TabState {
         laps(),
         tire(),
         pit(),
         setup(),
         pace();
     }
-    TapState tapState = TapState.laps;
+    TabState tabState = TabState.laps;
 
     Race race;
 
@@ -36,43 +36,49 @@ public class Display implements IDisplay {
     }
     public void render(Graphics g) {
         g.setFont(new Font("Impact", Font.BOLD, 42));
-        g.drawString(screens.get(tapState.ordinal()).name,x + 10, y + 42);
-        screens.get(tapState.ordinal()).render(g,x,y + 50);
+        g.drawString(screens.get(tabState.ordinal()).name,x + 10, y + 42);
+        screens.get(tabState.ordinal()).render(g,x,y + 50);
     }
 
     @Override
     public void nextTap() {
-        switch (tapState) {
-            case laps -> tapState = TapState.tire;
-            case tire -> tapState = TapState.pit;
-            case pit -> tapState = TapState.setup;
-            case  setup-> tapState = TapState.pace;
-            case pace -> tapState = TapState.laps;
+        switch (tabState) {
+            case laps -> tabState = TabState.tire;
+            case tire -> tabState = TabState.pit;
+            case pit -> tabState = TabState.setup;
+            case  setup-> tabState = TabState.pace;
+            case pace -> tabState = TabState.laps;
         }
-        screens.get(tapState.ordinal()).setFocusIndexLast();
+        screens.get(tabState.ordinal()).setFocusIndexLast();
     }
     @Override
     public void prevTap() {
-        switch (tapState) {
-            case laps -> tapState = TapState.pace;
-            case tire -> tapState = TapState.laps;
-            case pit -> tapState = TapState.tire;
-            case setup -> tapState = TapState.pit;
-            case pace -> tapState = TapState.setup;
+        switch (tabState) {
+            case laps -> tabState = TabState.pace;
+            case tire -> tabState = TabState.laps;
+            case pit -> tabState = TabState.tire;
+            case setup -> tabState = TabState.pit;
+            case pace -> tabState = TabState.setup;
         }
-        screens.get(tapState.ordinal()).setFocusIndexFirst();
+        screens.get(tabState.ordinal()).setFocusIndexFirst();
     }
 
     public void up() {
-        screens.get(tapState.ordinal()).up();
+        screens.get(tabState.ordinal()).up();
     }
     public void down() {
-        screens.get(tapState.ordinal()).down();
+        screens.get(tabState.ordinal()).down();
     }
     public void left() {
-        screens.get(tapState.ordinal()).left();
+        screens.get(tabState.ordinal()).left();
     }
     public void right() {
-        screens.get(tapState.ordinal()).right();
+        screens.get(tabState.ordinal()).right();
+    }
+    public void action() {
+        screens.get(tabState.ordinal()).action();
+    }
+    public void update() {
+        screens.get(tabState.ordinal()).update();
     }
 }

@@ -16,7 +16,6 @@ public class Config {
         maxValue =max;
         minValue =min;
     }
-
     public void up() {
         if (value >= maxValue) {
             value = minValue;
